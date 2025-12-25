@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZZ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="ANNIV.html" class="nav-link">Accueil</a>
+            </div>
+            <div class="nav-center">
+                <img src="https://i.imgur.com/1UziwHJ.png" alt="Logo Anniversaire TONE" class="logo">
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-link">Règles</a>
+                <a href="#" class="nav-link">Participants</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Quiz de l'Anniversaire TONE</h1>
+        
+        <div class="quiz-container" id="quizContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">Question 1/10</div>
+                <div class="question-text" id="questionText">Chargement de la question...</div>
+                
+                <div class="answers-grid" id="answersContainer">
+                    <!-- Les réponses seront générées par JavaScript -->
+                </div>
+            </div>
+            
+            <div class="quiz-navigation">
+                <button class="nav-button" id="prevButton" disabled>Précédent</button>
+                <div class="score-display" id="scoreDisplay">Score: 0/0</div>
+                <button class="nav-button" id="nextButton">Suivant</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Questions du quiz
+    const questions = [
+        {
+            question: "Quelle est la couleur préférée de TONE ?",
+            answers: ["Bleu", "Rouge", "Vert", "Jaune"],
+            correct: 0
+        },
+        {
+            question: "Quel est le plat préféré de TONE ?",
+            answers: ["Pizza", "Sushi", "Burger", "Pâtes"],
+            correct: 2
+        },
+        {
+            question: "Quelle est la passion principale de TONE ?",
+            answers: ["Sport", "Musique", "Gaming", "Lecture"],
+            correct: 2
+        },
+        {
+            question: "Quel est le film préféré de TONE ?",
+            answers: ["Action", "Comédie", "Science-fiction", "Horreur"],
+            correct: 2
+        },
+        {
+            question: "Quelle destination de vacances préfère TONE ?",
+            answers: ["Montagne", "Plage", "Ville", "Campagne"],
+            correct: 1
+        },
+        {
+            question: "Quel est le sport préféré de TONE ?",
+            answers: ["Football", "Basketball", "Tennis", "Natation"],
+            correct: 0
+        },
+        {
+            question: "Quel type de musique écoute TONE ?",
+            answers: ["Rock", "Pop", "Hip-hop", "Électro"],
+            correct: 3
+        },
+        {
+            question: "Quelle est la boisson préférée de TONE ?",
+            answers: ["Café", "Thé", "Jus", "Soda"],
+            correct: 0
+        },
+        {
+            question: "Quel animal préfère TONE ?",
+            answers: ["Chat", "Chien", "Oiseau", "Poisson"],
+            correct: 1
+        },
+        {
+            question: "Quelle saison préfère TONE ?",
+            answers: ["Printemps", "Été", "Automne", "Hiver"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let answered = false; // Nouveau : savoir si on a déjà validé cette question
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionText').textContent = q.question;
+        
+        const container = document.getElementById('answersContainer');
+        container.innerHTML = '';
+        
+        // Réinitialiser l'état
+        selectedAnswer = null;
+        answered = false;
+        
+        q.answers.forEach((answer, index) => {
+            const button = document.createElement('button');
+            button.className = 'answer-button';
+            button.textContent = answer;
+            button.onclick = () => selectAnswer(index);
+            container.appendChild(button);
+        });
+        
+        // Afficher/masquer les bons boutons
+        document.getElementById('validateButton').style.display = 'inline-block';
+        document.getElementById('nextButton').style.display = 'none';
+        
+        updateProgress();
+        updateNavButtons();
+        updateScoreDisplay();
+    }
+
+    function selectAnswer(index) {
+        // Ne pas permettre de changer si déjà validé
+        if (answered) return;
+        
+        selectedAnswer = index;
+        
+        const buttons = document.querySelectorAll('.answer-button');
+        buttons.forEach((btn, i) => {
+            btn.classList.remove('selected');
+            if (i === index) btn.classList.add('selected');
+        });
+    }
+
+    function validateAnswer() {
+        // Vérifier qu'une réponse est sélectionnée
+        if (selectedAnswer === null) {
+            alert('Veuillez sélectionner une réponse !');
+            return;
+        }
+        
+        // Si déjà validé, ne rien faire
+        if (answered) return;
+        
+        answered = true;
+        const correctIndex = questions[currentQuestion].correct;
+        const buttons = document.querySelectorAll('.answer-button');
+        
+        // Afficher la bonne réponse en vert
+        buttons[correctIndex].classList.add('correct');
+        
+        // Si la réponse sélectionnée est fausse, l'afficher en rouge
+        if (selectedAnswer !== correctIndex) {
+            buttons[selectedAnswer].classList.add('incorrect');
+        } else {
+            // Bonne réponse : incrémenter le score
+            score++;
+        }
+        
+        // Désactiver tous les boutons de réponse
+        buttons.forEach(btn => {
+            btn.style.cursor = 'default';
+            btn.onclick = null;
+        });
+        
+        // Masquer "Valider" et afficher "Suivant"
+        document.getElementById('validateButton').style.display = 'none';
+        document.getElementById('nextButton').style.display = 'inline-block';
+        
+        // Mettre à jour l'affichage du score
+        updateScoreDisplay();
+    }
+
+    function updateProgress() {
+        const progress = ((currentQuestion) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function updateNavButtons() {
+        document.getElementById('prevButton').disabled = currentQuestion === 0;
+        const nextBtn = document.getElementById('nextButton');
+        nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Terminer' : 'Suivant';
+    }
+
+    function updateScoreDisplay() {
+        // Afficher le score actuel / nombre de questions répondues
+        const questionsAnswered = answered ? currentQuestion + 1 : currentQuestion;
+        document.getElementById('scoreDisplay').textContent = `Score: ${score}/${questionsAnswered}`;
+    }
+
+    // Gestionnaire pour le bouton "Valider"
+    document.getElementById('validateButton').onclick = validateAnswer;
+
+    // Gestionnaire pour le bouton "Suivant"
+    document.getElementById('nextButton').onclick = () => {
+        if (!answered) {
+            alert('Veuillez d\'abord valider votre réponse !');
+            return;
+        }
+        
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    };
+
+    // Gestionnaire pour le bouton "Précédent"
+    document.getElementById('prevButton').onclick = () => {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            loadQuestion();
+        }
+    };
+
+    function showResults() {
+        const percentage = Math.round((score / questions.length) * 100);
+        let message = '';
+        
+        if (percentage >= 80) {
+            message = "Excellent ! Tu connais vraiment bien TONE ! 🎉";
+        } else if (percentage >= 60) {
+            message = "Bien joué ! Tu connais pas mal de choses sur TONE ! 👍";
+        } else if (percentage >= 40) {
+            message = "Pas mal ! Mais tu peux encore mieux connaître TONE ! 😊";
+        } else {
+            message = "Il va falloir passer plus de temps avec TONE ! 😄";
+        }
+        
+        const quizContainer = document.getElementById('quizContainer');
+        quizContainer.innerHTML = `
+            <div class="results-card">
+                <div class="results-title">Quiz Terminé !</div>
+                <div class="results-score">${score}/${questions.length}</div>
+                <div class="results-message">${message}<br><br>Tu as obtenu ${percentage}% de bonnes réponses !</div>
+                <button class="restart-button" onclick="restartQuiz()">Recommencer le Quiz</button>
+                <br><br>
+                <a href="ANNIV.html" class="nav-button" style="display: inline-block; text-decoration: none; margin-top: 20px;">Retour à l'accueil</a>
+            </div>
+        `;
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        selectedAnswer = null;
+        answered = false;
+        
+        const quizContainer = document.getElementById('quizContainer');
+        quizContainer.innerHTML = `
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">Question 1/10</div>
+                <div class="question-text" id="questionText">Chargement de la question...</div>
+                
+                <div class="answers-grid" id="answersContainer">
+                </div>
+            </div>
+            
+            <div class="quiz-navigation">
+                <button class="nav-button" id="prevButton" disabled>Précédent</button>
+                <div class="score-display" id="scoreDisplay">Score: 0/0</div>
+                <button class="nav-button" id="validateButton">Valider</button>
+                <button class="nav-button" id="nextButton" style="display: none;">Suivant</button>
+            </div>
+        `;
+        
+        // Réattacher les événements
+        document.getElementById('validateButton').onclick = validateAnswer;
+        document.getElementById('nextButton').onclick = () => {
+            if (!answered) {
+                alert('Veuillez d\'abord valider votre réponse !');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        };
+        document.getElementById('prevButton').onclick = () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        };
+        
+        loadQuestion();
+    }
+
+    // Charger la première question au démarrage
+    loadQuestion();
+</script>
+</body>
+</html>

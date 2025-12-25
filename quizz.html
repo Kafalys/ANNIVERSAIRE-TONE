@@ -11,7 +11,7 @@
     <nav>
         <div class="nav-container">
             <div class="nav-left">
-                <a href="ANNIV.html" class="nav-link">Accueil</a>
+                <a href="index.html" class="nav-link">Accueil</a>
             </div>
             <div class="nav-center">
                 <img src="https://i.imgur.com/1UziwHJ.png" alt="Logo Anniversaire TONE" class="logo">
@@ -42,10 +42,11 @@
                 </div>
             </div>
             
-            <div class="quiz-navigation">
+           <div class="quiz-navigation">
                 <button class="nav-button" id="prevButton" disabled>Précédent</button>
                 <div class="score-display" id="scoreDisplay">Score: 0/0</div>
-                <button class="nav-button" id="nextButton">Suivant</button>
+                <button class="nav-button" id="validateButton">Valider</button>
+                <button class="nav-button" id="nextButton" style="display: none;">Suivant</button>
             </div>
         </div>
     </div>
@@ -256,7 +257,7 @@
                 <div class="results-message">${message}<br><br>Tu as obtenu ${percentage}% de bonnes réponses !</div>
                 <button class="restart-button" onclick="restartQuiz()">Recommencer le Quiz</button>
                 <br><br>
-                <a href="ANNIV.html" class="nav-button" style="display: inline-block; text-decoration: none; margin-top: 20px;">Retour à l'accueil</a>
+                <a href="index.html" class="nav-button" style="display: inline-block; text-decoration: none; margin-top: 20px;">Retour à l'accueil</a>
             </div>
         `;
     }
@@ -318,4 +319,5 @@
     loadQuestion();
 </script>
 </body>
+
 </html>

@@ -1,7 +1,7 @@
 [
   {
     "question": "QUESTION 1",
-    "answers": ["A", "B", "C", "D"],
+    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "B", "C", "D"],
     "correct": [0,1,2,3],
     "popup": "Info sur la réponse 1"
   },
@@ -67,3 +67,4 @@
   }
 
 ]
+

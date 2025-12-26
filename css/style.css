@@ -367,8 +367,8 @@ h2 {
     border-radius: 15px;
     margin: 15% auto;
     padding: 40px;
-    width: 80%;
-    max-width: 500px;
+    width: 95%;
+    max-width: 700px;
     text-align: center;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -407,11 +407,6 @@ h2 {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
 }
 
 .modal-button {

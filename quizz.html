@@ -13,7 +13,7 @@
 
     <!-- Contenu principal -->
     <div class="container">
-        <h1>QUIZZ</h1>
+        <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;" alt=""> QUIZZ <img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;" alt=""></h1>
         
         <div class="quiz-container" id="quizContainer">
             <div class="progress-bar">
@@ -120,40 +120,50 @@
             alert('Veuillez sélectionner une réponse !');
             return;
         }
-        
         // Si déjà validé, ne rien faire
         if (answered) return;
-        
         answered = true;
-        const correctIndex = questions[currentQuestion].correct;
+        const correct = questions[currentQuestion].correct;
         const buttons = document.querySelectorAll('.answer-button');
-        
-        // Afficher la bonne réponse en vert
-        buttons[correctIndex].classList.add('correct');
-        
+
+        // Gérer plusieurs bonnes réponses (tableau ou nombre)
+        let isCorrect = false;
+        if (Array.isArray(correct)) {
+            // Plusieurs bonnes réponses
+            isCorrect = correct.includes(selectedAnswer);
+            // Afficher toutes les bonnes réponses en vert
+            correct.forEach(idx => {
+                if (buttons[idx]) buttons[idx].classList.add('correct');
+            });
+        } else {
+            // Une seule bonne réponse
+            isCorrect = (selectedAnswer === correct);
+            buttons[correct].classList.add('correct');
+        }
+
         // Si la réponse sélectionnée est fausse, l'afficher en rouge
-        if (selectedAnswer !== correctIndex) {
+        if (!isCorrect) {
             buttons[selectedAnswer].classList.add('incorrect');
         } else {
             // Bonne réponse : incrémenter le score
             score++;
         }
-        
+
         // Désactiver tous les boutons de réponse
         buttons.forEach(btn => {
             btn.style.cursor = 'default';
             btn.onclick = null;
         });
-        
+
         // Masquer "Valider" et afficher "Suivant"
         document.getElementById('validateButton').style.display = 'none';
         document.getElementById('nextButton').style.display = 'inline-block';
-        
+
         // Mettre à jour l'affichage du score
         updateScoreDisplay();
-        
+
         // Afficher le modal avec l'info sur la réponse
-        openModal(questions[currentQuestion].popup, selectedAnswer === correctIndex);
+        openModal(questions[currentQuestion].popup, isCorrect);
     }
 
     function updateProgress() {

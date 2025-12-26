@@ -1,27 +1,27 @@
 [
   {
-    "question": "QUESTION 1",
-    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">"],
+    "question": "Quelle est, objectivement, la meilleure emote de la chaine?",
+    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "B", "C", "D"],
     "correct": [0,1,2,3],
     "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">"
   },
   {
-    "question": "QUESTION 2",
-    "answers": ["A", "B", "C", "D"],
+    "question": "Quelle année as-tu le plus streamé?",
+    "answers": ["2025", "2021", "2020", "2024"],
     "correct": 2,
-    "popup": "Info sur la réponse 2"
+    "popup": "2020:2423h > 2021:2239h > 2025:2126h > 2024:1657h"
   },
   {
-    "question": "QUESTION 3",
-    "answers": ["A", "B", "C", "D"],
-    "correct": 2,
-    "popup": "Info sur la réponse 3"
+    "question": "Quelle catégorie as-tu le plus streamé en 2023?",
+    "answers": ["Minecraft", "Project Zomboid", "Just Chatting", "PUBG"],
+    "correct": 3,
+    "popup": "PUBG:212h > Just Chatting:192h > Project Zomboid:96h > Minecraft:89h"
   },
   {
-    "question": "QUESTION 4",
-    "answers": ["A", "B", "C", "D"],
-    "correct": 2,
-    "popup": "Info sur la réponse 4"
+    "question": "Combien d'heures de GTA as tu streamé en 2020?",
+    "answers": ["1200h", "800h", "1000h", "600h"],
+    "correct": 0,
+    "popup": "1200h loin devant le numéro 2: League of Legend avec 103h"
   },
   {
     "question": "QUESTION 5",
@@ -65,5 +65,4 @@
     "correct": 1,
     "popup": "Info sur la réponse 11"
   }
-
 ]

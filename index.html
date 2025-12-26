@@ -50,7 +50,20 @@
         // Charger la navigation depuis le template
         fetch('templates/header.html')
             .then(response => response.text())
-            .then(data => document.getElementById('nav-placeholder').innerHTML = data);
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+                // Attacher l'événement après chargement
+                document.getElementById('credits-link').addEventListener('click', openCreditsModal);
+            });
+
+        // Fonctions pour le modal des crédits
+        function openCreditsModal() {
+            document.getElementById('creditsModal').style.display = 'block';
+        }
+
+        function closeCreditsModal() {
+            document.getElementById('creditsModal').style.display = 'none';
+        }
     </script>
 </body>
 

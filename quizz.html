@@ -87,7 +87,7 @@
         q.answers.forEach((answer, index) => {
             const button = document.createElement('button');
             button.className = 'answer-button';
-            button.textContent = answer;
+            button.innerHTML = answer;
             button.onclick = () => selectAnswer(index);
             container.appendChild(button);
         });

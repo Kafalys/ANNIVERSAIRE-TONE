@@ -1,7 +1,7 @@
 [
   {
     "question": "QUESTION 1",
-    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "B", "C", "D"],
+    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">"],
     "correct": [0,1,2,3],
     "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">"
   },
@@ -65,4 +65,5 @@
     "correct": 1,
     "popup": "Info sur la réponse 11"
   }
+
 ]

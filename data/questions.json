@@ -2,56 +2,67 @@
   {
     "question": "QUESTION 1",
     "answers": ["A", "B", "C", "D"],
-    "correct": 0
+    "correct": 0,
+    "popup": "Info sur la réponse 1"
   },
   {
     "question": "QUESTION 2",
     "answers": ["A", "B", "C", "D"],
-    "correct": 2
+    "correct": 2,
+    "popup": "Info sur la réponse 2"
   },
   {
     "question": "QUESTION 3",
     "answers": ["A", "B", "C", "D"],
-    "correct": 2
+    "correct": 2,
+    "popup": "Info sur la réponse 3"
   },
   {
     "question": "QUESTION 4",
     "answers": ["A", "B", "C", "D"],
-    "correct": 2
+    "correct": 2,
+    "popup": "Info sur la réponse 4"
   },
   {
     "question": "QUESTION 5",
     "answers": ["A", "B", "C", "D"],
-    "correct": 1
+    "correct": 1,
+    "popup": "Info sur la réponse 5"
   },
   {
     "question": "QUESTION 6",
     "answers": ["A", "B", "C", "D"],
-    "correct": 0
+    "correct": 0,
+    "popup": "Info sur la réponse 6"
   },
   {
     "question": "QUESTION 7",
     "answers": ["A", "B", "C", "D"],
-    "correct": 3
+    "correct": 3,
+    "popup": "Info sur la réponse 7"
   },
   {
     "question": "QUESTION 8",
     "answers": ["A", "B", "C", "D"],
-    "correct": 0
+    "correct": 0,
+    "popup": "Info sur la réponse 8"
   },
   {
     "question": "QUESTION 9",
     "answers": ["A", "B", "C", "D"],
-    "correct": 1
+    "correct": 1,
+    "popup": "Info sur la réponse 9"
   },
   {
     "question": "QUESTION 10",
     "answers": ["A", "B", "C", "D"],
-    "correct": 1
+    "correct": 1,
+    "popup": "Info sur la réponse 10"
   },
   {
     "question": "QUESTION 11",
     "answers": ["A", "B", "C", "D"],
-    "correct": 1
+    "correct": 1,
+    "popup": "Info sur la réponse 11"
   }
 ]

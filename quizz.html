@@ -52,6 +52,7 @@
     </div>
 
 <script>
+
     // Questions du quiz - chargées depuis un fichier JSON
     let questions = [];
 
@@ -153,6 +154,9 @@
         
         // Mettre à jour l'affichage du score
         updateScoreDisplay();
+        
+        // Afficher le popup avec l'info sur la réponse
+        alert(questions[currentQuestion].popup);
     }
 
     function updateProgress() {

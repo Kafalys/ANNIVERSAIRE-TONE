@@ -1,57 +1,57 @@
 [
   {
-    "question": "Quelle est la couleur préférée de TONE ?",
-    "answers": ["Bleu", "Rouge", "Vert", "Jaune"],
+    "question": "QUESTION 1",
+    "answers": ["A", "B", "C", "D"],
     "correct": 0
   },
   {
-    "question": "Quel est le plat préféré de TONE ?",
-    "answers": ["Pizza", "Sushi", "Burger", "Pâtes"],
+    "question": "QUESTION 2",
+    "answers": ["A", "B", "C", "D"],
     "correct": 2
   },
   {
-    "question": "Quelle est la passion principale de TONE ?",
-    "answers": ["Sport", "Musique", "Gaming", "Lecture"],
+    "question": "QUESTION 3",
+    "answers": ["A", "B", "C", "D"],
     "correct": 2
   },
   {
-    "question": "Quel est le film préféré de TONE ?",
-    "answers": ["Action", "Comédie", "Science-fiction", "Horreur"],
+    "question": "QUESTION 4",
+    "answers": ["A", "B", "C", "D"],
     "correct": 2
   },
   {
-    "question": "Quelle destination de vacances préfère TONE ?",
-    "answers": ["Montagne", "Plage", "Ville", "Campagne"],
+    "question": "QUESTION 5",
+    "answers": ["A", "B", "C", "D"],
     "correct": 1
   },
   {
-    "question": "Quel est le sport préféré de TONE ?",
-    "answers": ["Football", "Basketball", "Tennis", "Natation"],
+    "question": "QUESTION 6",
+    "answers": ["A", "B", "C", "D"],
     "correct": 0
   },
   {
-    "question": "Quel type de musique écoute TONE ?",
-    "answers": ["Rock", "Pop", "Hip-hop", "Électro"],
+    "question": "QUESTION 7",
+    "answers": ["A", "B", "C", "D"],
     "correct": 3
   },
   {
-    "question": "Quelle est la boisson préférée de TONE ?",
-    "answers": ["Café", "Thé", "Jus", "Soda"],
+    "question": "QUESTION 8",
+    "answers": ["A", "B", "C", "D"],
     "correct": 0
   },
   {
-    "question": "Quel animal préfère TONE ?",
-    "answers": ["Chat", "Chien", "Oiseau", "Poisson"],
+    "question": "QUESTION 9",
+    "answers": ["A", "B", "C", "D"],
     "correct": 1
   },
   {
-    "question": "Quelle saison préfère TONE ?",
-    "answers": ["Printemps", "Été", "Automne", "Hiver"],
+    "question": "QUESTION 10",
+    "answers": ["A", "B", "C", "D"],
     "correct": 1
   },
   {
-    "question": "Quel jeu préfère TONE ?",
-    "answers": ["LOL", "GTA RP", "Elden Ring", "PUBG"],
+    "question": "QUESTION 11",
+    "answers": ["A", "B", "C", "D"],
     "correct": 1
   }
 ]

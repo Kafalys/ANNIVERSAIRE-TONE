@@ -77,6 +77,14 @@ nav {
     color: #4a9eff;
 }
 
+.mirror-horizontal {
+    transform: scaleX(-1);
+}
+
+.mirror-vertical {
+    transform: scaleY(-1);
+}
+
 /* ========================================
    CONTENU PRINCIPAL
    ======================================== */

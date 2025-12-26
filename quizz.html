@@ -171,7 +171,6 @@
     }
 
     function updateNavButtons() {
-        document.getElementById('prevButton').disabled = currentQuestion === 0;
         const nextBtn = document.getElementById('nextButton');
         nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Terminer' : 'Suivant';
     }
@@ -198,6 +197,7 @@
             showResults();
         }
     };
+
 
     function showResults() {
         const percentage = Math.round((score / questions.length) * 100);
@@ -247,7 +247,6 @@
             </div>
             
             <div class="quiz-navigation">
-                <button class="nav-button" id="prevButton" disabled>Précédent</button>
                 <div class="score-display" id="scoreDisplay">Score: 0/${questions.length}</div>
                 <button class="nav-button" id="validateButton">Valider</button>
                 <button class="nav-button" id="nextButton" style="display: none;">Suivant</button>
@@ -267,12 +266,6 @@
                 loadQuestion();
             } else {
                 showResults();
-            }
-        };
-        document.getElementById('prevButton').onclick = () => {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
             }
         };
         
@@ -327,4 +320,3 @@
 </body>
 
 </html>
-

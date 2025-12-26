@@ -1,15 +1,15 @@
 [
   {
-    "question": "Quelle est, objectivement, la meilleure emote de la chaine? ",
-    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">"],
+    "question": "QUESTION 1",
+    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "B", "C", "D"],
     "correct": [0,1,2,3],
     "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">"
   },
   {
-    "question": "Quelle est l'année où tu as le plus stream?",
-    "answers": ["2021", "2024", "2020", "2025"],
+    "question": "QUESTION 2",
+    "answers": ["A", "B", "C", "D"],
     "correct": 2,
-    "popup": "2020: 2423h / 2021: 2239h / 2024: 1657h / 2025: 2126h"
+    "popup": "Info sur la réponse 2"
   },
   {
     "question": "QUESTION 3",
@@ -65,8 +65,4 @@
     "correct": 1,
     "popup": "Info sur la réponse 11"
   }
-
 ]
-
-
-

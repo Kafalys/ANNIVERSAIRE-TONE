@@ -296,7 +296,7 @@
         const titleElement = document.getElementById('modalTitle');
         const modal = document.getElementById('popupModal');
         
-        document.getElementById('popupText').textContent = text;
+        document.getElementById('popupText').innerHTML = text;
         
         if (isCorrect) {
             titleElement.innerHTML = '<img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;"> Bonne réponse <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;">';

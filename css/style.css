@@ -407,6 +407,11 @@ h2 {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .modal-button {

@@ -51,6 +51,16 @@
         </div>
     </div>
 
+    <!-- Modal pour les infos sur les réponses -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Info sur la réponse</h2>
+            <p id="popupText"></p>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
 <script>
 
     // Questions du quiz - chargées depuis un fichier JSON
@@ -155,8 +165,8 @@
         // Mettre à jour l'affichage du score
         updateScoreDisplay();
         
-        // Afficher le popup avec l'info sur la réponse
-        alert(questions[currentQuestion].popup);
+        // Afficher le modal avec l'info sur la réponse
+        openModal(questions[currentQuestion].popup);
     }
 
     function updateProgress() {
@@ -283,6 +293,16 @@
 
     // Charger les questions et la première question au démarrage
     loadQuestions();
+
+    // Fonctions pour le modal
+    function openModal(text) {
+        document.getElementById('popupText').textContent = text;
+        document.getElementById('popupModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('popupModal').style.display = 'none';
+    }
 </script>
 </body>
 

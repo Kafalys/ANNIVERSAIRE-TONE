@@ -1,0 +1,57 @@
+[
+  {
+    "question": "Quelle est la couleur préférée de TONE ?",
+    "answers": ["Bleu", "Rouge", "Vert", "Jaune"],
+    "correct": 0
+  },
+  {
+    "question": "Quel est le plat préféré de TONE ?",
+    "answers": ["Pizza", "Sushi", "Burger", "Pâtes"],
+    "correct": 2
+  },
+  {
+    "question": "Quelle est la passion principale de TONE ?",
+    "answers": ["Sport", "Musique", "Gaming", "Lecture"],
+    "correct": 2
+  },
+  {
+    "question": "Quel est le film préféré de TONE ?",
+    "answers": ["Action", "Comédie", "Science-fiction", "Horreur"],
+    "correct": 2
+  },
+  {
+    "question": "Quelle destination de vacances préfère TONE ?",
+    "answers": ["Montagne", "Plage", "Ville", "Campagne"],
+    "correct": 1
+  },
+  {
+    "question": "Quel est le sport préféré de TONE ?",
+    "answers": ["Football", "Basketball", "Tennis", "Natation"],
+    "correct": 0
+  },
+  {
+    "question": "Quel type de musique écoute TONE ?",
+    "answers": ["Rock", "Pop", "Hip-hop", "Électro"],
+    "correct": 3
+  },
+  {
+    "question": "Quelle est la boisson préférée de TONE ?",
+    "answers": ["Café", "Thé", "Jus", "Soda"],
+    "correct": 0
+  },
+  {
+    "question": "Quel animal préfère TONE ?",
+    "answers": ["Chat", "Chien", "Oiseau", "Poisson"],
+    "correct": 1
+  },
+  {
+    "question": "Quelle saison préfère TONE ?",
+    "answers": ["Printemps", "Été", "Automne", "Hiver"],
+    "correct": 1
+  },
+  {
+    "question": "Quel jeu préfère TONE ?",
+    "answers": ["LOL", "GTA RP", "Elden Ring", "PUBG"],
+    "correct": 1
+  }
+]

@@ -2,7 +2,7 @@
   {
     "question": "QUESTION 1",
     "answers": ["A", "B", "C", "D"],
-    "correct": 0,
+    "correct": [0,1,2,3],
     "popup": "Info sur la réponse 1"
   },
   {
@@ -65,4 +65,5 @@
     "correct": 1,
     "popup": "Info sur la réponse 11"
   }
+
 ]

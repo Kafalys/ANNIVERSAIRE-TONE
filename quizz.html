@@ -199,14 +199,6 @@
         }
     };
 
-    // Gestionnaire pour le bouton "Précédent"
-    document.getElementById('prevButton').onclick = () => {
-        if (currentQuestion > 0) {
-            currentQuestion--;
-            loadQuestion();
-        }
-    };
-
     function showResults() {
         const percentage = Math.round((score / questions.length) * 100);
         let message = '';
@@ -335,3 +327,4 @@
 </body>
 
 </html>
+

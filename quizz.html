@@ -302,10 +302,10 @@
         document.getElementById('popupText').textContent = text;
         
         if (isCorrect) {
-            titleElement.textContent = 'Réponse juste';
+            titleElement.innerHTML = '<img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;"> Bonne réponse <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;">';
             titleElement.className = 'correct-title';
         } else {
-            titleElement.textContent = 'Réponse fausse';
+            titleElement.textContent = 'Mauvaise réponse';
             titleElement.className = 'incorrect-title';
         }
         
@@ -319,3 +319,4 @@
 </body>
 
 </html>
+

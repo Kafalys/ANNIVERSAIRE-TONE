@@ -381,6 +381,14 @@ h2 {
     font-size: 24px;
 }
 
+.correct-title {
+    color: #4eff9e !important; /* Vert pour juste */
+}
+
+.incorrect-title {
+    color: #ff4a4a !important; /* Rouge pour faux */
+}
+
 .modal-content p {
     color: #fff;
     font-size: 18px;

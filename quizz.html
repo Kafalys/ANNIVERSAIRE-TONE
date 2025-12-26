@@ -55,7 +55,7 @@
     <div id="popupModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
-            <h2>Info sur la réponse</h2>
+            <h2 id="modalTitle">Infos</h2>
             <p id="popupText"></p>
             <button class="modal-button" onclick="closeModal()">OK</button>
         </div>
@@ -166,7 +166,7 @@
         updateScoreDisplay();
         
         // Afficher le modal avec l'info sur la réponse
-        openModal(questions[currentQuestion].popup);
+        openModal(questions[currentQuestion].popup, selectedAnswer === correctIndex);
     }
 
     function updateProgress() {
@@ -295,9 +295,21 @@
     loadQuestions();
 
     // Fonctions pour le modal
-    function openModal(text) {
+    function openModal(text, isCorrect) {
+        const titleElement = document.getElementById('modalTitle');
+        const modal = document.getElementById('popupModal');
+        
         document.getElementById('popupText').textContent = text;
-        document.getElementById('popupModal').style.display = 'block';
+        
+        if (isCorrect) {
+            titleElement.textContent = 'Réponse juste';
+            titleElement.className = 'correct-title';
+        } else {
+            titleElement.textContent = 'Réponse fausse';
+            titleElement.className = 'incorrect-title';
+        }
+        
+        modal.style.display = 'block';
     }
 
     function closeModal() {

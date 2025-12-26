@@ -9,25 +9,11 @@
 </head>
 <body>
     <!-- Barre de navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-left">
-                <a href="index.html" class="nav-link">Accueil</a>
-            </div>
-            <div class="nav-center">
-                <img src="images/LOGO.png" alt="Logo Anniversaire TONE" class="logo">
-            </div>
-            <div class="nav-right">
-                <a href="#" class="nav-link">Règles</a>
-                <a href="#" class="nav-link">Participants</a>
-                <a href="#" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <!-- Contenu principal -->
     <div class="container">
-        <h1>Quiz de l'Anniversaire TONE</h1>
+        <h1>QUIZZ</h1>
         
         <div class="quiz-container" id="quizContainer">
             <div class="progress-bar">
@@ -316,6 +302,13 @@
     function closeModal() {
         document.getElementById('popupModal').style.display = 'none';
     }
+</script>
+
+<script>
+    // Charger la navigation depuis le template
+    fetch('templates/header.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('nav-placeholder').innerHTML = data);
 </script>
 </body>
 

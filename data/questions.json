@@ -3,66 +3,77 @@
     "question": "Quelle est, objectivement, la meilleure emote de la chaine?",
     "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">"],
     "correct": [0,1,2,3],
-    "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">"
+    "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">",
+    "categorie": "STREAM"
   },
   {
     "question": "Quelle année as-tu le plus streamé?",
     "answers": ["2025", "2021", "2020", "2024"],
     "correct": 2,
-    "popup": "2020:2423h > 2021:2239h > 2025:2126h > 2024:1657h"
+    "popup": "2020:2423h > 2021:2239h > 2025:2126h > 2024:1657h",
+    "categorie": "STATS"
   },
   {
     "question": "Quelle catégorie as-tu le plus streamé en 2023?",
     "answers": ["Minecraft", "Project Zomboid", "Just Chatting", "PUBG"],
     "correct": 3,
-    "popup": "PUBG:212h > Just Chatting:192h > Project Zomboid:96h > Minecraft:89h"
+    "popup": "PUBG:212h > Just Chatting:192h > Project Zomboid:96h > Minecraft:89h",
+    "categorie": "STATS"
   },
   {
     "question": "Combien d'heures de GTA as tu streamé en 2020?",
     "answers": ["1200h", "800h", "1000h", "600h"],
     "correct": 0,
-    "popup": "1200h loin devant le numéro 2: League of Legend avec 103h"
+    "popup": "1200h loin devant le numéro 2: League of Legend avec 103h",
+    "categorie": "STATS"
   },
   {
-    "question": "QUESTION 5",
-    "answers": ["A", "B", "C", "D"],
+    "question": "Quelle est la date de ton premier stream (recensé sur TwitchTracker)?",
+    "answers": ["10 juillet 2017", "12 aout 2017", "23 septembre 2017", "12 decembre 2017"],
     "correct": 1,
-    "popup": "Info sur la réponse 5"
+    "popup": "Stream sur GTA RP",
+    "categorie": "STATS"
   },
   {
-    "question": "QUESTION 6",
-    "answers": ["A", "B", "C", "D"],
+    "question": "A quelle place as-tu terminé le FFS#24 sur Fortnite le 29 mai 2024?",
+    "answers": ["72ème", "62ème", "52ème", "42ème"],
     "correct": 0,
-    "popup": "Info sur la réponse 6"
+    "popup": "Derrière le traitre Kailon.. <br><br><video controls style='max-width: 100%; border-radius: 10px;'><source src='images/FFS Fortnite Kailon.mp4' type='video/mp4'>Votre navigateur ne supporte pas la vidéo.</video>",
+    "categorie": "FFS"
   },
   {
-    "question": "QUESTION 7",
-    "answers": ["A", "B", "C", "D"],
+    "question": "A quelle place as-tu terminé le FFS#18 sur Fall Guys le 21 avril 2022?",
+    "answers": ["48ème", "14ème", "18ème", "2ème"],
     "correct": 3,
-    "popup": "Info sur la réponse 7"
+    "popup": "Juste derrière MoMaN le boss final du jeu! 🏆<br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/ax7MMd6.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "FFS"
   },
   {
     "question": "QUESTION 8",
     "answers": ["A", "B", "C", "D"],
     "correct": 0,
-    "popup": "Info sur la réponse 8"
+    "popup": "Info sur la réponse 8",
+    "categorie": "NA"
   },
   {
     "question": "QUESTION 9",
     "answers": ["A", "B", "C", "D"],
     "correct": 1,
-    "popup": "Info sur la réponse 9"
+    "popup": "Info sur la réponse 9",
+    "categorie": "NA"
   },
   {
     "question": "QUESTION 10",
     "answers": ["A", "B", "C", "D"],
     "correct": 1,
-    "popup": "Info sur la réponse 10"
+    "popup": "Info sur la réponse 10",
+    "categorie": "NA"
   },
   {
     "question": "QUESTION 11",
     "answers": ["A", "B", "C", "D"],
     "correct": 1,
-    "popup": "Info sur la réponse 11"
+    "popup": "Info sur la réponse 11",
+    "categorie": "NA"
   }
 ]

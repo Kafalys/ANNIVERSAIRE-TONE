@@ -16,12 +16,22 @@
         <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;" alt=""> QUIZZ <img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;" alt=""></h1>
         
         <div class="quiz-container" id="quizContainer">
+            <!-- ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ========== -->
+            <div style="margin-bottom: 20px; text-align: center;">
+                <label for="questionSelector" style="color: #ff4a4a; font-weight: bold; margin-right: 10px;">🔧 TEST - Aller à la question :</label>
+                <select id="questionSelector" style="padding: 8px; border-radius: 5px; background: #1a2940; color: #fff; border: 2px solid #4a9eff; font-size: 16px; cursor: pointer;">
+                    <!-- Les options seront générées par JavaScript -->
+                </select>
+            </div>
+            <!-- ================================================================== -->
+            
             <div class="progress-bar">
                 <div class="progress-fill" id="progressBar" style="width: 0%"></div>
             </div>
             
             <div class="question-card">
                 <div class="question-number" id="questionNumber">Question 1/10</div>
+                <div class="question-category" id="questionCategory">Catégorie</div>
                 <div class="question-text" id="questionText">Chargement de la question...</div>
                 
                 <div class="answers-grid" id="answersContainer">
@@ -59,12 +69,39 @@
                 throw new Error('Erreur HTTP: ' + response.status);
             }
             questions = await response.json();
+            
+            // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+            populateQuestionSelector();
+            // ===================================================================
+            
             loadQuestion();
         } catch (error) {
             console.error('Erreur lors du chargement des questions:', error);
             alert('Impossible de charger les questions. Vérifiez la connexion ou le fichier.');
         }
     }
+
+    // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+    function populateQuestionSelector() {
+        const selector = document.getElementById('questionSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '';
+        questions.forEach((q, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `Q${index + 1}: ${q.question.substring(0, 50)}...`;
+            selector.appendChild(option);
+        });
+        
+        selector.addEventListener('change', function() {
+            currentQuestion = parseInt(this.value);
+            answered = false;
+            selectedAnswer = null;
+            loadQuestion();
+        });
+    }
+    // ===================================================================
 
     let currentQuestion = 0;
     let score = 0;
@@ -73,6 +110,12 @@
 
     function loadQuestion() {
         const q = questions[currentQuestion];
+        
+        // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+        const selector = document.getElementById('questionSelector');
+        if (selector) selector.value = currentQuestion;
+        // ===================================================================
+        document.getElementById('questionCategory').textContent = q.categorie || 'NA';
         document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}/${questions.length}`;
         document.getElementById('questionText').textContent = q.question;
         
@@ -240,6 +283,7 @@
             
             <div class="question-card">
                 <div class="question-number" id="questionNumber">Question 1/${questions.length}</div>
+                <div class="question-category" id="questionCategory">Catégorie</div>
                 <div class="question-text" id="questionText">Chargement de la question...</div>
                 
                 <div class="answers-grid" id="answersContainer">
@@ -298,25 +342,7 @@
     }
 </script>
 
-<script>
-    // Charger la navigation depuis le template
-    fetch('templates/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('nav-placeholder').innerHTML = data;
-            // Attacher l'événement après chargement
-            document.getElementById('credits-link').addEventListener('click', openCreditsModal);
-        });
-
-    // Fonctions pour le modal des crédits
-    function openCreditsModal() {
-        document.getElementById('creditsModal').style.display = 'block';
-    }
-
-    function closeCreditsModal() {
-        document.getElementById('creditsModal').style.display = 'none';
-    }
-</script>
+<script src="js/modals.js"></script>
 </body>
 
 </html>

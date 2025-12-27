@@ -38,7 +38,7 @@
     "question": "A quelle place as-tu terminé le FFS#24 sur Fortnite le 29 mai 2024?",
     "answers": ["72ème", "62ème", "52ème", "42ème"],
     "correct": 0,
-    "popup": "Derrière le traitre Kailon.. <br><br><video controls style='max-width: 100%; border-radius: 10px;'><source src='images/FFS Fortnite Kailon.mp4' type='video/mp4'>Votre navigateur ne supporte pas la vidéo.</video>",
+    "popup": "Derrière le traitre Kailon.. <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/Z5gAHhK.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
     "categorie": "FFS"
   },
   {
@@ -76,4 +76,5 @@
     "popup": "Info sur la réponse 11",
     "categorie": "NA"
   }
+
 ]

@@ -17,7 +17,7 @@
     "question": "Quelle catégorie as-tu le plus streamé en 2023?",
     "answers": ["Minecraft", "Project Zomboid", "Just Chatting", "PUBG"],
     "correct": 3,
-    "popup": "PUBG:212h > Just Chatting:192h > Project Zomboid:96h > Minecraft:89h",
+    "popup": "<strong>PUBG</strong>:212h > <strong>Just Chatting</strong>:192h > <strong>Project Zomboid</strong>:96h > <strong>Minecraft</strong>:89h",
     "categorie": "STATS"
   },
   {
@@ -31,29 +31,28 @@
     "question": "Quelle est la date de ton premier stream (recensé sur TwitchTracker)?",
     "answers": ["10 juillet 2017", "12 aout 2017", "23 septembre 2017", "12 decembre 2017"],
     "correct": 1,
-    "popup": "Stream sur GTA RP",
+    "popup": "Stream sur <strong>GTA RP</strong>",
     "categorie": "STATS"
   },
   {
     "question": "A quelle place as-tu terminé le FFS#24 sur Fortnite le 29 mai 2024?",
     "answers": ["72ème", "62ème", "52ème", "42ème"],
     "correct": 0,
-    "popup": "Derrière le traitre Kailon.. <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/Z5gAHhK.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
-    "categorie": "FFS"
+    "popup": "Derrière le traitre Kailon.. <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/Z5gAHhK.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",    "categorie": "FFS"
   },
   {
     "question": "A quelle place as-tu terminé le FFS#18 sur Fall Guys le 21 avril 2022?",
     "answers": ["48ème", "14ème", "18ème", "2ème"],
     "correct": 3,
-    "popup": "Juste derrière MoMaN le boss final du jeu! 🏆<br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/ax7MMd6.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "popup": "TOP2 Juste derrière MoMaN le boss final du jeu! <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/ax7MMd6.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
     "categorie": "FFS"
   },
   {
-    "question": "QUESTION 8",
-    "answers": ["A", "B", "C", "D"],
+    "question": "Quel est ton PB sur le speedrun Minecraft? ",
+    "answers": ["9h 26min 30sec", "9h 58min 05sec", "8h 26min 30sec", "8h 58min 05sec"],
     "correct": 0,
-    "popup": "Info sur la réponse 8",
-    "categorie": "NA"
+    "popup": "PB Minecraft le 02 mars 2023 <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/mT8J61m.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "STREAM"
   },
   {
     "question": "QUESTION 9",
@@ -76,6 +75,4 @@
     "popup": "Info sur la réponse 11",
     "categorie": "NA"
   }
-
 ]
-

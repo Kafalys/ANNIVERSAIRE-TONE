@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOTS FLÉCHÉS</title>
+    <link rel="icon" href="images/LOGO.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="container">
+        <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;" alt=""> MOTS FLÉCHÉS <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;" alt=""></h1>
+
+        <div class="quiz-container" id="crosswordContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div class="question-card crossword-card">
+                <div class="question-number">Grille 1/1</div>
+                <div class="question-category">Mot fléché</div>
+                <div class="question-text">Complète la grille avec les définitions ci-dessous.</div>
+
+                <div class="crossword-layout">
+                    <div class="crossword-grid" id="crosswordGrid"></div>
+
+                    <div class="crossword-clues">
+                        <div class="clues-block">
+                            <h3>→ Horizontales</h3>
+                            <ul id="acrossClues"></ul>
+                        </div>
+                        <div class="clues-block">
+                            <h3>↓ Verticales</h3>
+                            <ul id="downClues"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-navigation">
+                <div class="score-display" id="scoreDisplay">Lettres correctes : 0/0</div>
+                <button class="nav-button" id="validateButton">Valider</button>
+                <button class="nav-button" id="nextButton">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Infos</h2>
+            <p id="popupText"></p>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        let gridSize = 10;
+        let entries = [];
+        let solutionGrid = [];
+        const numberedCells = new Map();
+
+        async function loadCrosswordData() {
+            const response = await fetch('data/motsfleches.json');
+            if (!response.ok) {
+                throw new Error('Erreur HTTP: ' + response.status);
+            }
+
+            const data = await response.json();
+
+            if (Array.isArray(data)) {
+                entries = data;
+            } else {
+                gridSize = Number(data.gridSize) || 10;
+                entries = Array.isArray(data.entries) ? data.entries : [];
+            }
+
+            if (entries.length === 0) {
+                throw new Error('Le fichier motsfleches.json ne contient aucune entrée.');
+            }
+        }
+
+        function initializeGridState() {
+            solutionGrid = Array.from({ length: gridSize }, () => Array(gridSize).fill(null));
+            numberedCells.clear();
+        }
+
+        function normalizeLetter(value) {
+            return value
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toUpperCase()
+                .replace(/[^A-Z]/g, '');
+        }
+
+        function buildSolutionGrid() {
+            entries.forEach((entry) => {
+                const answer = normalizeLetter(entry.answer);
+
+                for (let i = 0; i < answer.length; i++) {
+                    const row = entry.direction === 'across' ? entry.row : entry.row + i;
+                    const col = entry.direction === 'across' ? entry.col + i : entry.col;
+
+                    if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
+                        throw new Error(`Le mot ${entry.answer} sort de la grille.`);
+                    }
+
+                    const currentLetter = solutionGrid[row][col];
+                    if (currentLetter && currentLetter !== answer[i]) {
+                        throw new Error(`Conflit de lettres pour ${entry.answer} en ${row},${col}.`);
+                    }
+
+                    solutionGrid[row][col] = answer[i];
+
+                    const key = `${row},${col}`;
+                    if (i === 0 && !numberedCells.has(key)) {
+                        numberedCells.set(key, entry.id);
+                    }
+                }
+            });
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('crosswordGrid');
+            grid.style.gridTemplateColumns = `repeat(${gridSize}, 42px)`;
+            grid.style.gridTemplateRows = `repeat(${gridSize}, 42px)`;
+            grid.innerHTML = '';
+
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    const letter = solutionGrid[row][col];
+                    if (!letter) {
+                        continue;
+                    }
+
+                    const cell = document.createElement('div');
+                    cell.className = 'crossword-cell active';
+                    cell.style.gridRowStart = row + 1;
+                    cell.style.gridColumnStart = col + 1;
+
+                    const input = document.createElement('input');
+                    input.className = 'crossword-input';
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.dataset.row = row;
+                    input.dataset.col = col;
+                    input.autocomplete = 'off';
+                    input.addEventListener('input', onCellInput);
+                    input.addEventListener('keydown', onCellBackspace);
+                    cell.appendChild(input);
+
+                    const key = `${row},${col}`;
+                    if (numberedCells.has(key)) {
+                        const number = document.createElement('span');
+                        number.className = 'crossword-number';
+                        number.textContent = numberedCells.get(key);
+                        cell.appendChild(number);
+                    }
+
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function renderClues() {
+            const acrossList = document.getElementById('acrossClues');
+            const downList = document.getElementById('downClues');
+            acrossList.innerHTML = '';
+            downList.innerHTML = '';
+
+            entries
+                .filter((entry) => entry.direction === 'across')
+                .forEach((entry) => {
+                    const item = document.createElement('li');
+                    item.textContent = `${entry.id}. ${entry.clue} (${normalizeLetter(entry.answer).length})`;
+                    acrossList.appendChild(item);
+                });
+
+            entries
+                .filter((entry) => entry.direction === 'down')
+                .forEach((entry) => {
+                    const item = document.createElement('li');
+                    item.textContent = `${entry.id}. ${entry.clue} (${normalizeLetter(entry.answer).length})`;
+                    downList.appendChild(item);
+                });
+        }
+
+        function getAllInputs() {
+            return document.querySelectorAll('.crossword-input');
+        }
+
+        function onCellInput(event) {
+            const input = event.target;
+            const clean = normalizeLetter(input.value);
+            input.value = clean.slice(0, 1);
+            input.classList.remove('correct', 'incorrect');
+
+            if (input.value) {
+                const inputs = Array.from(getAllInputs());
+                const index = inputs.indexOf(input);
+                if (index >= 0 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+
+            updateProgressAndScore();
+        }
+
+        function onCellBackspace(event) {
+            const input = event.target;
+            if (event.key !== 'Backspace' || input.value !== '') {
+                return;
+            }
+
+            const inputs = Array.from(getAllInputs());
+            const index = inputs.indexOf(input);
+            if (index > 0) {
+                inputs[index - 1].focus();
+            }
+        }
+
+        function getValidationStats() {
+            const inputs = Array.from(getAllInputs());
+            let correct = 0;
+
+            inputs.forEach((input) => {
+                const row = Number(input.dataset.row);
+                const col = Number(input.dataset.col);
+                const expected = solutionGrid[row][col];
+                if (normalizeLetter(input.value) === expected) {
+                    correct++;
+                }
+            });
+
+            return {
+                total: inputs.length,
+                correct
+            };
+        }
+
+        function updateProgressAndScore() {
+            const stats = getValidationStats();
+            const progress = stats.total === 0 ? 0 : Math.round((stats.correct / stats.total) * 100);
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('scoreDisplay').textContent = `Lettres correctes : ${stats.correct}/${stats.total}`;
+        }
+
+        function validateGrid() {
+            const inputs = Array.from(getAllInputs());
+            let hasEmpty = false;
+
+            inputs.forEach((input) => {
+                const row = Number(input.dataset.row);
+                const col = Number(input.dataset.col);
+                const expected = solutionGrid[row][col];
+                const value = normalizeLetter(input.value);
+
+                input.classList.remove('correct', 'incorrect');
+
+                if (!value) {
+                    hasEmpty = true;
+                    return;
+                }
+
+                if (value === expected) {
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+            });
+
+            const stats = getValidationStats();
+            updateProgressAndScore();
+
+            if (stats.correct === stats.total && !hasEmpty) {
+                openModal('Grille complétée parfaitement ! 🥳', true);
+                return;
+            }
+
+            if (hasEmpty) {
+                openModal('Il reste des cases vides. Continue encore un peu !', false);
+            } else {
+                openModal(`Tu as ${stats.correct} lettre(s) correcte(s) sur ${stats.total}.`, false);
+            }
+        }
+
+        function resetGrid() {
+            getAllInputs().forEach((input) => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            updateProgressAndScore();
+        }
+
+        function openModal(text, isCorrect) {
+            const titleElement = document.getElementById('modalTitle');
+            const modal = document.getElementById('popupModal');
+            document.getElementById('popupText').innerHTML = text;
+
+            if (isCorrect) {
+                titleElement.textContent = 'Bravo !';
+                titleElement.className = 'correct-title';
+            } else {
+                titleElement.textContent = 'Info';
+                titleElement.className = 'incorrect-title';
+            }
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('popupModal').style.display = 'none';
+        }
+
+        async function initCrossword() {
+            try {
+                await loadCrosswordData();
+                initializeGridState();
+                buildSolutionGrid();
+                renderGrid();
+                renderClues();
+                updateProgressAndScore();
+
+                document.getElementById('validateButton').addEventListener('click', validateGrid);
+                document.getElementById('nextButton').addEventListener('click', resetGrid);
+            } catch (error) {
+                console.error('Erreur lors du chargement du mot fléché :', error);
+                alert('Impossible de charger le mot fléché. Vérifie le fichier data/motsfleches.json');
+            }
+        }
+
+        initCrossword();
+    </script>
+
+    <script src="js/modals.js"></script>
+</body>
+</html>

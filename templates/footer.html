@@ -1,0 +1,21 @@
+    <!-- Modal pour les infos sur les réponses -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Infos</h2>
+            <p id="popupText"></p>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Fonctions communes (ex. pour le modal)
+        function openModal(text, isCorrect) {
+            // ... code du modal ...
+        }
+        function closeModal() {
+            document.getElementById('popupModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

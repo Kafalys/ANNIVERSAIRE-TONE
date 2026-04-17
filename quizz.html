@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZZ</title>
+    <link rel="icon" href="images/LOGO.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;" alt=""> QUIZZ <img src="https://static-cdn.jtvnw.net/emoticons/v2/302234940/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;" alt=""></h1>
+        
+        <div class="quiz-container" id="quizContainer">
+            <!-- ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ========== -->
+            <div style="margin-bottom: 20px; text-align: center;">
+                <label for="questionSelector" style="color: #ff4a4a; font-weight: bold; margin-right: 10px;">🔧 TEMPORAIRE - Aller à la question :</label>
+                <select id="questionSelector" style="padding: 8px; border-radius: 5px; background: #1a2940; color: #fff; border: 2px solid #4a9eff; font-size: 16px; cursor: pointer;">
+                    <!-- Les options seront générées par JavaScript -->
+                </select>
+            </div>
+            <!-- ================================================================== -->
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">Question 1/10</div>
+                <div class="question-category" id="questionCategory">Catégorie</div>
+                <div class="question-text" id="questionText">Chargement de la question...</div>
+                
+                <div class="answers-grid" id="answersContainer">
+                    <!-- Les réponses seront générées par JavaScript -->
+                </div>
+            </div>
+            
+           <div class="quiz-navigation">
+                <div class="score-display" id="scoreDisplay">Score: 0/0</div>
+                <button class="nav-button" id="validateButton">Valider</button>
+                <button class="nav-button" id="nextButton" style="display: none;">Suivant</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les infos sur les réponses -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Infos</h2>
+            <p id="popupText"></p>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+<script>
+
+    // Questions du quiz - chargées depuis un fichier JSON
+    let questions = [];
+
+    async function loadQuestions() {
+        try {
+            const response = await fetch('data/questions.json');
+            if (!response.ok) {
+                throw new Error('Erreur HTTP: ' + response.status);
+            }
+            questions = await response.json();
+            
+            // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+            populateQuestionSelector();
+            // ===================================================================
+            
+            loadQuestion();
+        } catch (error) {
+            console.error('Erreur lors du chargement des questions:', error);
+            alert('Impossible de charger les questions. Vérifiez la connexion ou le fichier.');
+        }
+    }
+
+    // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+    function populateQuestionSelector() {
+        const selector = document.getElementById('questionSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '';
+        questions.forEach((q, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `Q${index + 1}: ${q.question.substring(0, 50)}...`;
+            selector.appendChild(option);
+        });
+        
+        selector.addEventListener('change', function() {
+            currentQuestion = parseInt(this.value);
+            answered = false;
+            selectedAnswer = null;
+            loadQuestion();
+        });
+    }
+    // ===================================================================
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let answered = false; // Nouveau : savoir si on a déjà validé cette question
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        
+        // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+        const selector = document.getElementById('questionSelector');
+        if (selector) selector.value = currentQuestion;
+        // ===================================================================
+        document.getElementById('questionCategory').textContent = q.categorie || 'NA';
+        document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionText').textContent = q.question;
+        
+        const container = document.getElementById('answersContainer');
+        container.innerHTML = '';
+        
+        // Réinitialiser l'état
+        selectedAnswer = null;
+        answered = false;
+        
+        q.answers.forEach((answer, index) => {
+            const button = document.createElement('button');
+            button.className = 'answer-button';
+            button.innerHTML = answer;
+            button.onclick = () => selectAnswer(index);
+            container.appendChild(button);
+        });
+        
+        // Afficher/masquer les bons boutons
+        document.getElementById('validateButton').style.display = 'inline-block';
+        document.getElementById('nextButton').style.display = 'none';
+        
+        updateProgress();
+        updateNavButtons();
+        updateScoreDisplay();
+    }
+
+    function selectAnswer(index) {
+        // Ne pas permettre de changer si déjà validé
+        if (answered) return;
+        
+        selectedAnswer = index;
+        
+        const buttons = document.querySelectorAll('.answer-button');
+        buttons.forEach((btn, i) => {
+            btn.classList.remove('selected');
+            if (i === index) btn.classList.add('selected');
+        });
+    }
+
+    function validateAnswer() {
+        // Vérifier qu'une réponse est sélectionnée
+        if (selectedAnswer === null) {
+            alert('Veuillez sélectionner une réponse !');
+            return;
+        }
+        // Si déjà validé, ne rien faire
+        if (answered) return;
+        answered = true;
+        const correct = questions[currentQuestion].correct;
+        const buttons = document.querySelectorAll('.answer-button');
+
+        // Gérer plusieurs bonnes réponses (tableau ou nombre)
+        let isCorrect = false;
+        if (Array.isArray(correct)) {
+            // Plusieurs bonnes réponses
+            isCorrect = correct.includes(selectedAnswer);
+            // Afficher toutes les bonnes réponses en vert
+            correct.forEach(idx => {
+                if (buttons[idx]) buttons[idx].classList.add('correct');
+            });
+        } else {
+            // Une seule bonne réponse
+            isCorrect = (selectedAnswer === correct);
+            buttons[correct].classList.add('correct');
+        }
+
+        // Si la réponse sélectionnée est fausse, l'afficher en rouge
+        if (!isCorrect) {
+            buttons[selectedAnswer].classList.add('incorrect');
+        } else {
+            // Bonne réponse : incrémenter le score
+            score++;
+        }
+
+        // Désactiver tous les boutons de réponse
+        buttons.forEach(btn => {
+            btn.style.cursor = 'default';
+            btn.onclick = null;
+        });
+
+        // Masquer "Valider" et afficher "Suivant"
+        document.getElementById('validateButton').style.display = 'none';
+        document.getElementById('nextButton').style.display = 'inline-block';
+
+        // Mettre à jour l'affichage du score
+        updateScoreDisplay();
+
+        // Afficher le modal avec l'info sur la réponse
+        openModal(questions[currentQuestion].popup, isCorrect);
+    }
+
+    function updateProgress() {
+        const progress = ((currentQuestion) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function updateNavButtons() {
+        const nextBtn = document.getElementById('nextButton');
+        nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Terminer' : 'Suivant';
+    }
+
+    function updateScoreDisplay() {
+        // Afficher le score actuel / nombre total de questions
+        document.getElementById('scoreDisplay').textContent = `Score: ${score}/${questions.length}`;
+    }
+
+    // Gestionnaire pour le bouton "Valider"
+    document.getElementById('validateButton').onclick = validateAnswer;
+
+    // Gestionnaire pour le bouton "Suivant"
+    document.getElementById('nextButton').onclick = () => {
+        if (!answered) {
+            alert('Veuillez d\'abord valider votre réponse !');
+            return;
+        }
+        
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    };
+
+
+    function showResults() {
+        const percentage = Math.round((score / questions.length) * 100);
+        let message = '';
+        
+        if (percentage >= 80) {
+            message = "Excellent ! Tu connais vraiment bien TONE ! 🎉";
+        } else if (percentage >= 60) {
+            message = "Bien joué ! Tu connais pas mal de choses sur TONE ! 👍";
+        } else if (percentage >= 40) {
+            message = "Pas mal ! Mais tu peux encore mieux connaître TONE ! 😊";
+        } else {
+            message = "Il va falloir passer plus de temps avec TONE ! 😄";
+        }
+        
+        const quizContainer = document.getElementById('quizContainer');
+        quizContainer.innerHTML = `
+            <div class="results-card">
+                <div class="results-title">Quiz Terminé !</div>
+                <div class="results-score">${score}/${questions.length}</div>
+                <div class="results-message">${message}<br><br>Tu as obtenu ${percentage}% de bonnes réponses !</div>
+                <button class="restart-button" onclick="restartQuiz()">Recommencer le Quiz</button>
+                <br><br>
+                <a href="index.html" class="nav-button" style="display: inline-block; text-decoration: none; margin-top: 20px;">Retour à l'accueil</a>
+            </div>
+        `;
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        selectedAnswer = null;
+        answered = false;
+        
+        const quizContainer = document.getElementById('quizContainer');
+        quizContainer.innerHTML = `
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">Question 1/${questions.length}</div>
+                <div class="question-category" id="questionCategory">Catégorie</div>
+                <div class="question-text" id="questionText">Chargement de la question...</div>
+                
+                <div class="answers-grid" id="answersContainer">
+                </div>
+            </div>
+            
+            <div class="quiz-navigation">
+                <div class="score-display" id="scoreDisplay">Score: 0/${questions.length}</div>
+                <button class="nav-button" id="validateButton">Valider</button>
+                <button class="nav-button" id="nextButton" style="display: none;">Suivant</button>
+            </div>
+        `;
+        
+        // Réattacher les événements
+        document.getElementById('validateButton').onclick = validateAnswer;
+        document.getElementById('nextButton').onclick = () => {
+            if (!answered) {
+                alert('Veuillez d\'abord valider votre réponse !');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        };
+        
+        loadQuestion();
+    }
+
+    // Charger les questions et la première question au démarrage
+    loadQuestions();
+
+    // Fonctions pour le modal
+    function openModal(text, isCorrect) {
+        const titleElement = document.getElementById('modalTitle');
+        const modal = document.getElementById('popupModal');
+        
+        document.getElementById('popupText').innerHTML = text;
+        
+        if (isCorrect) {
+            titleElement.innerHTML = '<img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;">    Bonne réponse    <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;">';
+            titleElement.className = 'correct-title';
+        } else {
+            titleElement.innerHTML = '<img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0b9b5b51652f4617bdad48735ed00775/static/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;">    Mauvaise réponse    <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0b9b5b51652f4617bdad48735ed00775/static/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;">';
+            titleElement.className = 'incorrect-title';
+        }
+        
+    // Rendre les images cliquables pour les agrandir
+    setTimeout(() => {
+        const images = modal.querySelectorAll('img:not([style*="height:32px"])');
+        images.forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.onclick = () => {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+                const bigImg = document.createElement('img');
+                bigImg.src = img.src;
+                bigImg.style.cssText = 'max-width:90%;max-height:90vh;border-radius:10px;';
+                overlay.appendChild(bigImg);
+                overlay.onclick = () => document.body.removeChild(overlay);
+                document.body.appendChild(overlay);
+            };
+        });
+    }, 100);
+
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('popupModal');
+        modal.style.display = 'none';
+        const videos = modal.querySelectorAll('video');
+        videos.forEach(video => video.pause());
+    }
+</script>
+
+<script src="js/modals.js"></script>
+</body>
+
+</html>

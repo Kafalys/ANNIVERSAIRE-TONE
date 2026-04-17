@@ -1,0 +1,53 @@
+{
+  "gridSize": 10,
+  "entries": [
+    {
+      "id": 1,
+      "direction": "across",
+      "row": 1,
+      "col": 1,
+      "answer": "TONE",
+      "clue": "Le nom au cœur de ce projet."
+    },
+    {
+      "id": 2,
+      "direction": "across",
+      "row": 3,
+      "col": 2,
+      "answer": "TWITCH",
+      "clue": "Plateforme de streaming violet."
+    },
+    {
+      "id": 3,
+      "direction": "across",
+      "row": 5,
+      "col": 1,
+      "answer": "EMOTE",
+      "clue": "Petite image utilisée dans le chat."
+    },
+    {
+      "id": 4,
+      "direction": "down",
+      "row": 0,
+      "col": 0,
+      "answer": "CHAT",
+      "clue": "Zone de discussion en direct."
+    },
+    {
+      "id": 5,
+      "direction": "down",
+      "row": 2,
+      "col": 9,
+      "answer": "LIVE",
+      "clue": "Diffusion en direct (anglais)."
+    },
+    {
+      "id": 6,
+      "direction": "down",
+      "row": 1,
+      "col": 7,
+      "answer": "RP",
+      "clue": "Abréviation de RolePlay."
+    }
+  ]
+}

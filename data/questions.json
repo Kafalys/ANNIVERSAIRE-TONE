@@ -1,0 +1,176 @@
+[
+  {
+    "question": "Quelle est, objectivement, la meilleure emote de la chaine?",
+    "answers": ["<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">", "<img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_1a48f8cf505246f0b205799c73829cfb/static/light/3.0\" style=\"height:32px;\">"],
+    "correct": [0,1,2,3],
+    "popup": "Et non pas l'immonde <img src=\"https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_24e6cd7fe2de42019c70836ac39379f0/static/light/3.0\" style=\"height:32px;vertical-align:middle;\">",
+    "categorie": "STREAM"
+  },
+  {
+    "question": "Quelle année as-tu le plus streamé?",
+    "answers": ["2025", "2021", "2020", "2024"],
+    "correct": 2,
+    "popup": "Clip le plus vu de 2020: <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/ozOmg0m.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "STATS"
+  },
+  {
+    "question": "Quelle catégorie as-tu le plus streamé en 2023?",
+    "answers": ["Minecraft", "Project Zomboid", "Just Chatting", "PUBG"],
+    "correct": 3,
+    "popup": "<strong>PUBG</strong>: 212h <br> <strong>Just Chatting</strong>: 192h <br> <strong>Project Zomboid</strong>: 96h <br> <strong>Minecraft</strong>: 89h",
+    "categorie": "STATS"
+  },
+  {
+    "question": "Combien d'heures de GTA as tu streamé en 2020?",
+    "answers": ["1200h", "800h", "1000h", "600h"],
+    "correct": 0,
+    "popup": "1200h loin devant le numéro 2: League of Legend avec 103h",
+    "categorie": "STATS"
+  },
+  {
+    "question": "Quelle est la date de ton premier stream (recensé sur TwitchTracker)?",
+    "answers": ["10 juillet 2017", "12 aout 2017", "23 septembre 2017", "12 decembre 2017"],
+    "correct": 1,
+    "popup": "Stream sur <strong>GTA RP</strong>",
+    "categorie": "STATS"
+  },
+  {
+    "question": "A quelle place as-tu terminé le FFS#24 sur Fortnite le 29 mai 2024?",
+    "answers": ["72ème", "62ème", "52ème", "42ème"],
+    "correct": 0,
+    "popup": "Derrière le traitre Kailon.. <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/Z5gAHhK.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",    "categorie": "FFS"
+  },
+  {
+    "question": "A quelle place as-tu terminé le FFS#18 sur Fall Guys le 21 avril 2022?",
+    "answers": ["48ème", "14ème", "18ème", "2ème"],
+    "correct": 3,
+    "popup": "TOP2 Juste derrière MoMaN le boss final du jeu! <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/ax7MMd6.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "FFS"
+  },
+  {
+    "question": "Quel est ton PB sur le speedrun Minecraft? ",
+    "answers": ["9h 26min 30sec", "9h 58min 05sec", "8h 26min 30sec", "8h 58min 05sec"],
+    "correct": 0,
+    "popup": "PB Minecraft le 02 mars 2023 <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/mT8J61m.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "STREAM"
+  },
+  {
+    "question": "Quel est le clip le plus vu de la chaine?",
+    "answers": ["Rip la Baby", "La voiture à Garrrrrrrrry BOOM !!!!!!!!!!!!!!!!!!", "La mort del Racoon :'(", "Le message de fin du RPZ (Moment émotions..)"],
+    "correct": 1,
+    "popup": "La voiture à Garrrrrrrrry BOOM !!!!!!!!!!!!!!!!!! <br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='images/La voiture à Garry.mp4' type='video/mp4'></video>",
+    "categorie": "STREAM"
+  },
+  {
+    "question": "A combien de subs s'est fini le SubaTone 2025?",
+    "answers": ["5584", "5602", "1212", "5684"],
+    "correct": 1,
+    "popup": "<img src=\"images/Fin SUBATONE.png\" alt=\"Fin SUBATONE\" style=\"max-width: 100%; height: auto;\">",
+    "categorie": "STREAM"
+  },
+  {
+    "question": "Quel était ton GOTY 2022?",
+    "answers": ["Red Dead Redemption 2 (Faily Death)", "Project Zomboid", "Hollow Knight", "Foxhole"],
+    "correct": 0,
+    "popup": "<br><br><video controls loop playsinline style='max-width: 100%; border-radius: 10px;'><source src='https://i.imgur.com/qEDSjcW.mp4' type='video/mp4'><div style='padding: 20px; background: rgba(45, 122, 255, 0.2); color: #2d7aff; border-radius: 10px;'>Vidéo non supportée par votre navigateur</div></video>",
+    "categorie": "STREAM"
+  },
+  {
+    "question": "QUESTION 12",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 0,
+    "popup": "Info sur la réponse 12",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 13",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 2,
+    "popup": "Info sur la réponse 13",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 14",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 3,
+    "popup": "Info sur la réponse 14",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 15",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 1,
+    "popup": "Info sur la réponse 15",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 16",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 0,
+    "popup": "Info sur la réponse 16",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 17",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 2,
+    "popup": "Info sur la réponse 17",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 18",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 3,
+    "popup": "Info sur la réponse 18",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 19",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 1,
+    "popup": "Info sur la réponse 19",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 20",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 0,
+    "popup": "Info sur la réponse 20",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 21",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 2,
+    "popup": "Info sur la réponse 21",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 22",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 3,
+    "popup": "Info sur la réponse 22",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 23",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 1,
+    "popup": "Info sur la réponse 23",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 24",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 0,
+    "popup": "Info sur la réponse 24",
+    "categorie": "NA"
+  },
+  {
+    "question": "QUESTION 25",
+    "answers": ["A", "B", "C", "D"],
+    "correct": 2,
+    "popup": "Info sur la réponse 25",
+    "categorie": "NA"
+  }
+]

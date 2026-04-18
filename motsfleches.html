@@ -11,7 +11,7 @@
     <div id="nav-placeholder"></div>
 
     <div class="container">
-        <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" class="mirror-horizontal" style="width: 56px; height: 56px; vertical-align: middle;" alt=""> MOTS FLÉCHÉS <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" style="width: 56px; height: 56px; vertical-align: middle;" alt=""></h1>
+        <h1><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" class="emote-icon mirror-horizontal" alt=""> MOTS FLÉCHÉS <img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_510ac7e8564d4cc5a0b0bf76e8991f47/animated/light/3.0" class="emote-icon" alt=""></h1>
 
         <div class="quiz-container" id="crosswordContainer">
             <div class="progress-bar">
@@ -148,7 +148,7 @@
                     input.dataset.col = col;
                     input.autocomplete = 'off';
                     input.addEventListener('input', onCellInput);
-                    input.addEventListener('keydown', onCellBackspace);
+                    input.addEventListener('keydown', onCellKeydown);
                     cell.appendChild(input);
 
                     const key = `${row},${col}`;
@@ -164,6 +164,23 @@
             }
         }
 
+        function highlightEntry(entry, liElement) {
+            document.querySelectorAll('.crossword-cell').forEach(c => c.classList.remove('highlighted'));
+            document.querySelectorAll('.clues-block li').forEach(l => l.classList.remove('active-clue'));
+
+            const answer = normalizeLetter(entry.answer);
+            for (let i = 0; i < answer.length; i++) {
+                const row = entry.direction === 'across' ? entry.row : entry.row + i;
+                const col = entry.direction === 'across' ? entry.col + i : entry.col;
+                const input = findInput(row, col);
+                if (input) input.closest('.crossword-cell').classList.add('highlighted');
+            }
+
+            if (liElement) liElement.classList.add('active-clue');
+            const firstInput = findInput(entry.row, entry.col);
+            if (firstInput) firstInput.focus();
+        }
+
         function renderClues() {
             const acrossList = document.getElementById('acrossClues');
             const downList = document.getElementById('downClues');
@@ -175,6 +192,7 @@
                 .forEach((entry) => {
                     const item = document.createElement('li');
                     item.textContent = `${entry.id}. ${entry.clue} (${normalizeLetter(entry.answer).length})`;
+                    item.addEventListener('click', () => highlightEntry(entry, item));
                     acrossList.appendChild(item);
                 });
 
@@ -183,12 +201,17 @@
                 .forEach((entry) => {
                     const item = document.createElement('li');
                     item.textContent = `${entry.id}. ${entry.clue} (${normalizeLetter(entry.answer).length})`;
+                    item.addEventListener('click', () => highlightEntry(entry, item));
                     downList.appendChild(item);
                 });
         }
 
         function getAllInputs() {
             return document.querySelectorAll('.crossword-input');
+        }
+
+        function findInput(row, col) {
+            return document.querySelector(`.crossword-input[data-row="${row}"][data-col="${col}"]`);
         }
 
         function onCellInput(event) {
@@ -208,16 +231,30 @@
             updateProgressAndScore();
         }
 
-        function onCellBackspace(event) {
+        function onCellKeydown(event) {
             const input = event.target;
-            if (event.key !== 'Backspace' || input.value !== '') {
+            const row = Number(input.dataset.row);
+            const col = Number(input.dataset.col);
+
+            const arrowMoves = {
+                ArrowLeft:  [row, col - 1],
+                ArrowRight: [row, col + 1],
+                ArrowUp:    [row - 1, col],
+                ArrowDown:  [row + 1, col],
+            };
+
+            if (event.key in arrowMoves) {
+                event.preventDefault();
+                const [r, c] = arrowMoves[event.key];
+                const target = findInput(r, c);
+                if (target) target.focus();
                 return;
             }
 
-            const inputs = Array.from(getAllInputs());
-            const index = inputs.indexOf(input);
-            if (index > 0) {
-                inputs[index - 1].focus();
+            if (event.key === 'Backspace' && input.value === '') {
+                const inputs = Array.from(getAllInputs());
+                const index = inputs.indexOf(input);
+                if (index > 0) inputs[index - 1].focus();
             }
         }
 

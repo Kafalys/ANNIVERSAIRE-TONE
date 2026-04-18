@@ -86,8 +86,7 @@
             if (!response.ok) {
                 throw new Error('Erreur HTTP: ' + response.status);
             }
-            questions = (await response.json()).map(shuffleAnswers);
-            shuffleArray(questions);
+            questions = await response.json();
 
             // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
             populateQuestionSelector();

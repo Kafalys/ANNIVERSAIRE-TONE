@@ -44,6 +44,14 @@
                 <button class="nav-button" id="validateButton">Valider</button>
                 <button class="nav-button" id="nextButton">Réinitialiser</button>
             </div>
+
+            <!-- ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ========== -->
+            <div style="margin-top:1rem; text-align:center;">
+                <button class="nav-button" id="devSolutionBtn" onclick="toggleSolutions()" style="background: linear-gradient(135deg, #ff9a4a 0%, #bf7a3a 100%);">
+                    🔧 Afficher solutions
+                </button>
+            </div>
+            <!-- ================================================================== -->
         </div>
     </div>
 
@@ -57,9 +65,10 @@
     </div>
 
     <script>
-        let gridSize = 10;
+        let gridSize = 20;
         let entries = [];
         let solutionGrid = [];
+        let activeDirection = 'across';
         const numberedCells = new Map();
 
         async function loadCrosswordData() {
@@ -92,7 +101,7 @@
                 .normalize('NFD')
                 .replace(/[\u0300-\u036f]/g, '')
                 .toUpperCase()
-                .replace(/[^A-Z]/g, '');
+                .replace(/[^A-Z0-9]/g, '');
         }
 
         function buildSolutionGrid() {
@@ -165,6 +174,7 @@
         }
 
         function highlightEntry(entry, liElement) {
+            activeDirection = entry.direction;
             document.querySelectorAll('.crossword-cell').forEach(c => c.classList.remove('highlighted'));
             document.querySelectorAll('.clues-block li').forEach(l => l.classList.remove('active-clue'));
 
@@ -178,7 +188,7 @@
 
             if (liElement) liElement.classList.add('active-clue');
             const firstInput = findInput(entry.row, entry.col);
-            if (firstInput) firstInput.focus();
+            if (firstInput) { firstInput.focus(); firstInput.select(); }
         }
 
         function renderClues() {
@@ -221,11 +231,12 @@
             input.classList.remove('correct', 'incorrect');
 
             if (input.value) {
-                const inputs = Array.from(getAllInputs());
-                const index = inputs.indexOf(input);
-                if (index >= 0 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
+                const row = Number(input.dataset.row);
+                const col = Number(input.dataset.col);
+                const next = activeDirection === 'across'
+                    ? findInput(row, col + 1)
+                    : findInput(row + 1, col);
+                if (next) { next.focus(); next.select(); }
             }
 
             updateProgressAndScore();
@@ -247,14 +258,26 @@
                 event.preventDefault();
                 const [r, c] = arrowMoves[event.key];
                 const target = findInput(r, c);
-                if (target) target.focus();
+                if (target) { target.focus(); target.select(); }
+                return;
+            }
+
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                const next = activeDirection === 'across'
+                    ? findInput(row, col + 1)
+                    : findInput(row + 1, col);
+                if (next) { next.focus(); next.select(); }
                 return;
             }
 
             if (event.key === 'Backspace' && input.value === '') {
-                const inputs = Array.from(getAllInputs());
-                const index = inputs.indexOf(input);
-                if (index > 0) inputs[index - 1].focus();
+                const row = Number(input.dataset.row);
+                const col = Number(input.dataset.col);
+                const prev = activeDirection === 'across'
+                    ? findInput(row, col - 1)
+                    : findInput(row - 1, col);
+                if (prev) { prev.focus(); prev.select(); }
             }
         }
 
@@ -322,6 +345,34 @@
                 openModal(`Tu as ${stats.correct} lettre(s) correcte(s) sur ${stats.total}.`, false);
             }
         }
+
+        // ========== DEV ONLY - A SUPPRIMER POUR LA VERSION FINALE ==========
+        let solutionsVisible = false;
+        let savedValues = {};
+
+        function toggleSolutions() {
+            const btn = document.getElementById('devSolutionBtn');
+            if (!solutionsVisible) {
+                getAllInputs().forEach((input) => {
+                    const row = Number(input.dataset.row);
+                    const col = Number(input.dataset.col);
+                    savedValues[`${row},${col}`] = input.value;
+                    input.value = solutionGrid[row][col] || '';
+                });
+                btn.textContent = '🔧 Masquer solutions';
+                solutionsVisible = true;
+            } else {
+                getAllInputs().forEach((input) => {
+                    const row = Number(input.dataset.row);
+                    const col = Number(input.dataset.col);
+                    input.value = savedValues[`${row},${col}`] ?? '';
+                });
+                btn.textContent = '🔧 Afficher solutions';
+                solutionsVisible = false;
+            }
+            updateProgressAndScore();
+        }
+        // ====================================================================
 
         function resetGrid() {
             getAllInputs().forEach((input) => {

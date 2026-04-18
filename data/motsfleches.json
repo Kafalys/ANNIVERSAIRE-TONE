@@ -1,53 +1,86 @@
 {
-  "gridSize": 10,
+  "gridSize": 20,
   "entries": [
     {
       "id": 1,
       "direction": "across",
-      "row": 1,
-      "col": 1,
-      "answer": "TONE2TWITCH",
+      "row": 3,
+      "col": 0,
+      "answer": "TONE2TWITCHTOP16ZLAN",
       "clue": "Nom complet du streamer."
     },
     {
       "id": 2,
-      "direction": "across",
+      "direction": "down",
       "row": 3,
-      "col": 2,
-      "answer": "TWITCH",
-      "clue": "Plateforme de streaming violet."
+      "col": 5,
+      "answer": "TOPACHAT",
+      "clue": "Meilleur fournisseur de matériel informatique."
     },
     {
       "id": 3,
-      "direction": "across",
-      "row": 5,
-      "col": 1,
-      "answer": "EMOTE",
-      "clue": "Petite image utilisée dans le chat."
+      "direction": "down",
+      "row": 0,
+      "col": 7,
+      "answer": "BIBICHE",
+      "clue": "Meilleure son selon la commu."
     },
     {
       "id": 4,
-      "direction": "down",
-      "row": 0,
-      "col": 0,
-      "answer": "CHAT",
-      "clue": "Zone de discussion en direct."
+      "direction": "across",
+      "row": 1,
+      "col": 4,
+      "answer": "BORIS",
+      "clue": "Il va y avoir du sport."
     },
     {
       "id": 5,
-      "direction": "down",
-      "row": 2,
-      "col": 9,
-      "answer": "LIVE",
-      "clue": "Diffusion en direct (anglais)."
+      "direction": "across",
+      "row": 5,
+      "col": 7,
+      "answer": "HAVANE",
+      "clue": "La reine du stream."
     },
     {
       "id": 6,
       "direction": "down",
-      "row": 1,
-      "col": 7,
+      "row": 2,
+      "col": 13,
       "answer": "RP",
-      "clue": "Abréviation de RolePlay."
+      "clue": "C KAN?"
+    },
+    {
+      "id": 7,
+      "direction": "down",
+      "row": 3,
+      "col": 11,
+      "answer": "TONTON",
+      "clue": "Surnom donné par Liam."
+    },
+        {
+      "id": 8,
+      "direction": "across",
+      "row": 10,
+      "col": 5,
+      "answer": "TSUKI",
+      "clue": "Grooooos."
+    },
+    {
+      "id": 9,
+      "direction": "down",
+      "row": 1,
+      "col": 17,
+      "answer": "HOLY",
+      "clue": "Meilleur fournisseur de boisson énergisante."
+    },
+    {
+      "id": 10,
+      "direction": "down",
+      "row": 2,
+      "col": 3,
+      "answer": "PEPPER",
+      "clue": "Le cowboy (pas d'inspi)"
     }
+
   ]
 }

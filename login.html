@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversaire TONE – Accès</title>
+    <link rel="icon" href="images/LOGO.png" type="image/png">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a2332;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #2a3f5f 0%, #1a2940 100%);
+            border: 2px solid #3a5a7f;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            width: min(360px, 90vw);
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #4a9eff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #a0b4cc;
+            margin-bottom: 1.75rem;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.75rem;
+        }
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #3a5a7f;
+            background: transparent;
+            transition: background 0.15s, border-color 0.15s, transform 0.1s;
+        }
+        .dot.filled {
+            background: #4a9eff;
+            border-color: #4a9eff;
+            transform: scale(1.15);
+        }
+        .dot.error {
+            background: #ff4a4a;
+            border-color: #ff4a4a;
+        }
+        .dot.success {
+            background: #4eff9e;
+            border-color: #4eff9e;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .key {
+            background: linear-gradient(135deg, #1a2940 0%, #0f1923 100%);
+            border: 2px solid #2a4a6f;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 0.9rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .key:hover {
+            border-color: #4a9eff;
+            background: linear-gradient(135deg, #2a4a6f 0%, #1a2940 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+        }
+        .key:active {
+            transform: scale(0.92) translateY(0);
+            box-shadow: none;
+        }
+        .key.del {
+            font-size: 18px;
+            color: #a0b4cc;
+        }
+        .key.zero { grid-column: 2; }
+
+        .status {
+            font-size: 14px;
+            min-height: 20px;
+            color: transparent;
+            transition: color 0.2s;
+        }
+        .status.error { color: #ff4a4a; }
+        .status.success { color: #4eff9e; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+        .shake { animation: shake 0.4s ease; }
+
+        .confetti-piece {
+            position: fixed;
+            width: 8px;
+            height: 14px;
+            border-radius: 2px;
+            top: -20px;
+            animation: confettiFall var(--cf-d, 1.2s) ease-in forwards var(--cf-delay, 0s);
+            pointer-events: none;
+            z-index: 999;
+        }
+        @keyframes confettiFall {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(var(--cf-rot, 720deg)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="card">
+    <span class="lock-icon">🎂</span>
+    <h1>C'est par ici !</h1>
+    <p class="subtitle">Entre le code secret pour accéder à la fête</p>
+
+    <div class="dots" id="dots"></div>
+
+    <div class="keypad">
+        <button class="key" onclick="pressKey('1')">1</button>
+        <button class="key" onclick="pressKey('2')">2</button>
+        <button class="key" onclick="pressKey('3')">3</button>
+        <button class="key" onclick="pressKey('4')">4</button>
+        <button class="key" onclick="pressKey('5')">5</button>
+        <button class="key" onclick="pressKey('6')">6</button>
+        <button class="key" onclick="pressKey('7')">7</button>
+        <button class="key" onclick="pressKey('8')">8</button>
+        <button class="key" onclick="pressKey('9')">9</button>
+        <button class="key zero" onclick="pressKey('0')">0</button>
+        <button class="key del" onclick="deleteKey()">⌫</button>
+    </div>
+
+    <p class="status" id="status"></p>
+</div>
+
+<script>
+    const CODE = "12122021";
+    let current = "";
+    let locked = false;
+
+    const dotsEl = document.getElementById('dots');
+    for (let i = 0; i < CODE.length; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot';
+        d.id = 'dot-' + i;
+        dotsEl.appendChild(d);
+    }
+
+    function updateDots() {
+        for (let i = 0; i < CODE.length; i++)
+            document.getElementById('dot-' + i).className = 'dot' + (i < current.length ? ' filled' : '');
+    }
+
+    function pressKey(digit) {
+        if (locked || current.length >= CODE.length) return;
+        current += digit;
+        updateDots();
+        if (current.length === CODE.length) setTimeout(checkCode, 150);
+    }
+
+    function deleteKey() {
+        if (locked || current.length === 0) return;
+        current = current.slice(0, -1);
+        updateDots();
+        setStatus('', '');
+    }
+
+    function checkCode() {
+        if (current === CODE) {
+            locked = true;
+            for (let i = 0; i < CODE.length; i++)
+                document.getElementById('dot-' + i).className = 'dot success';
+            document.querySelector('.lock-icon').textContent = '🎉';
+            setStatus('Bienvenue ! Bon anniversaire Tone 🎂', 'success');
+            launchConfetti();
+            sessionStorage.setItem('tone_access', '1');
+            setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+        } else {
+            for (let i = 0; i < CODE.length; i++)
+                document.getElementById('dot-' + i).className = 'dot error';
+            setStatus('Code incorrect, réessaie !', 'error');
+            const card = document.getElementById('card');
+            card.classList.add('shake');
+            card.addEventListener('animationend', () => card.classList.remove('shake'), { once: true });
+            setTimeout(() => { current = ""; updateDots(); setStatus('', ''); }, 900);
+        }
+    }
+
+    function setStatus(msg, type) {
+        const el = document.getElementById('status');
+        el.textContent = msg;
+        el.className = 'status ' + type;
+    }
+
+    function launchConfetti() {
+        const colors = ['#4a9eff', '#4eff9e', '#ffffff', '#3a7ebf', '#a0cfff'];
+        for (let i = 0; i < 80; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti-piece';
+            c.style.cssText = `
+                left:${Math.random()*100}vw;
+                background:${colors[Math.floor(Math.random()*colors.length)]};
+                --cf-d:${(Math.random()*1+0.8).toFixed(2)}s;
+                --cf-delay:${(Math.random()*1.5).toFixed(2)}s;
+                --cf-rot:${Math.random()>0.5?'':'-'}${Math.floor(Math.random()*720+360)}deg;
+            `;
+            document.body.appendChild(c);
+            c.addEventListener('animationend', () => c.remove());
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key >= '0' && e.key <= '9') pressKey(e.key);
+        if (e.key === 'Backspace') deleteKey();
+    });
+</script>
+</body>
+</html>
